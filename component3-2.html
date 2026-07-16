@@ -18,27 +18,36 @@
   </style>
 </head>
 <body>
-  <div id="components-demo">
-    <button-counter></button-counter>
+  <div id="blog-posts-demo">
+    <blog-post
+      v-for="post in posts"
+      :key="post.id"
+      :title="post.title"
+    ></blog-post>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@3.5.0/dist/vue.global.js"></script>
   <script>
-    const app = Vue.createApp({});
-
-    app.component('button-counter', {
+    const App = {
       data() {
         return {
-          count: 0
-        };
-      },
-      template: `
-        <button v-on:click="count++">
-          count {{ count }} 
-        </button>`
+          posts: [
+            { id: 1, title: 'Vueとの航海' },
+            { id: 2, title: 'Vueとの旅' },
+            { id: 3, title: 'Vue旅行記' }
+          ]
+        }
+      }
+    }
+    
+    const app = Vue.createApp(App);
+    
+    app.component('blog-post', {
+      props: ['title'],
+      template: `<h4>{{ title }}</h4>`
     });
-
-    app.mount('#components-demo');
+    
+    app.mount('#blog-posts-demo');
   </script>
 </body>
 </html>

@@ -15,30 +15,35 @@
       user-select: none;
       overflow-x: auto;
     }
+    
+    .demo-alert-box {
+      padding: 10px 20px;
+      background: #f3beb8;
+      border: 1px solid #f09898;
+    }
   </style>
 </head>
 <body>
-  <div id="components-demo">
-    <button-counter></button-counter>
+  <div id="slots-demo">
+    <alert-box>
+      何か問題が発生しました。
+    </alert-box>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@3.5.0/dist/vue.global.js"></script>
   <script>
     const app = Vue.createApp({});
-
-    app.component('button-counter', {
-      data() {
-        return {
-          count: 0
-        };
-      },
+    
+    app.component('alert-box', {
       template: `
-        <button v-on:click="count++">
-          count {{ count }} 
-        </button>`
+        <div class="demo-alert-box">
+          <strong>Error!</strong>
+          <slot></slot>
+        </div>
+      `
     });
-
-    app.mount('#components-demo');
+    
+    app.mount('#slots-demo');
   </script>
 </body>
 </html>
